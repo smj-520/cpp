@@ -1,0 +1,211 @@
+﻿:root {
+  --primary: #28a745;
+  --primary-dark: #1e7a34;
+  --primary-light: #5cb85c;
+  --surface: #fefdf9;
+  --surface-card: #ffffff;
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --error: #b3261e;
+  --success: #28a745;
+  --outline: #dee2e6;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: linear-gradient(180deg, #f4fbf6 0%, var(--surface) 65%);
+  color: var(--text-primary);
+}
+
+.page {
+  width: min(560px, 92vw);
+  margin: 56px auto;
+  background: var(--surface-card);
+  border: 1px solid rgba(40, 167, 69, 0.15);
+  border-radius: 24px;
+  box-shadow: 0 12px 30px rgba(40, 167, 69, 0.12);
+  padding: 28px;
+  animation: rise 320ms ease-out;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.wallet {
+  width: 42px;
+  height: 32px;
+  border-radius: 9px;
+  background: #1b5e3a;
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+.wallet::before,
+.wallet::after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  width: 10px;
+  border-radius: 2px;
+  background: #2fa65c;
+}
+
+.wallet::before { left: 9px; height: 15px; }
+.wallet::after { left: 23px; height: 13px; }
+
+.coin {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #f7d468, #c9a227);
+  position: absolute;
+  left: -10px;
+  bottom: 2px;
+}
+
+h1 {
+  margin: 8px 0 4px;
+  text-align: center;
+  font-size: clamp(1.35rem, 2.2vw, 1.65rem);
+}
+
+.subtitle {
+  margin: 0 0 18px;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.policy-hint {
+  margin: 0 0 14px;
+  padding: 10px 12px;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  color: var(--text-secondary);
+  text-align: center;
+  background: rgba(40, 167, 69, 0.06);
+  border-radius: 12px;
+  border: 1px solid rgba(40, 167, 69, 0.12);
+}
+
+.alert {
+  border-radius: 14px;
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  margin-bottom: 16px;
+}
+
+.alert.info { background: #e6f4ea; color: #145428; border: 1px solid rgba(40, 167, 69, 0.25); }
+.alert.error { background: #fdecea; color: var(--error); border: 1px solid #f5c2c7; }
+.alert.success { background: #e6f4ea; color: #145428; border: 1px solid rgba(40, 167, 69, 0.25); }
+
+label {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+input {
+  width: 100%;
+  border-radius: 14px;
+  border: 1.5px solid var(--outline);
+  background: #fff;
+  outline: none;
+  padding: 14px 14px;
+  font-size: 1rem;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(40, 167, 69, 0.12);
+}
+
+.row {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+button,
+.btn-link {
+  border: 0;
+  border-radius: 14px;
+  padding: 12px 18px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button.primary,
+.btn-link.primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+button.primary:hover,
+.btn-link.primary:hover { background: var(--primary-dark); }
+
+button.ghost,
+.btn-link.ghost {
+  background: #fff;
+  color: var(--text-primary);
+  border: 1px solid var(--outline);
+}
+
+.footer {
+  margin-top: 24px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.86rem;
+}
+
+#resetSection {
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+#resetSection .row {
+  justify-content: center;
+}
+
+#saveBtn {
+  min-width: 220px;
+}
+
+.hidden { display: none !important; }
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(255, 255, 255, 0.25);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

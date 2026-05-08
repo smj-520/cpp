@@ -1,0 +1,55 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hostel Student Wallet - Secure Action</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="page" role="main">
+      <div class="brand" aria-label="Hostel Student Wallet">
+        <div class="wallet"><span class="coin"></span></div>
+        <strong id="brandName">Hostel Student Wallet</strong>
+      </div>
+
+      <h1 id="title">Secure Action</h1>
+      <p id="subtitle" class="subtitle">Validating your request…</p>
+
+      <div id="message" class="alert info">Please wait…</div>
+
+      <section id="resetSection" class="hidden" aria-live="polite">
+        <p class="policy-hint">
+          At least 8 characters, with uppercase, lowercase, a number, and a symbol (e.g. ! @ #).
+        </p>
+        <label for="newPassword">New password</label>
+        <input
+          id="newPassword"
+          type="password"
+          autocomplete="new-password"
+          minlength="8"
+          placeholder="8+ chars: upper, lower, number, symbol"
+        />
+
+        <label for="confirmPassword" style="margin-top: 12px;">Confirm password</label>
+        <input
+          id="confirmPassword"
+          type="password"
+          autocomplete="new-password"
+          minlength="8"
+          placeholder="Repeat password"
+        />
+
+        <div class="row">
+          <button id="saveBtn" class="primary" type="button">Save password</button>
+        </div>
+      </section>
+
+      <p class="footer">
+        If this was not you, ignore this page and keep your account secure.
+      </p>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
