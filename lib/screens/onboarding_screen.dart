@@ -10,7 +10,6 @@ import '../widgets/rounded_back_button.dart';
 import 'login_screen.dart';
 import 'register_screen.dart';
 import 'splash_screen.dart';
-
 /// Single onboarding step matching reference: budgets + goals, two green actions.
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
