@@ -93,7 +93,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       return;
     }
 
-    final email = FormValidators.normalizeGmail(_email.text);
+    final email = FormValidators.normalizeEmail(_email.text);
     final rawPhone = _phone.text.trim().replaceAll(RegExp(r'[\s-]'), '');
     late final String e164;
     try {
@@ -112,7 +112,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       );
       return;
     }
-
+//hashing...
     setState(() => _loading = true);
     try {
       final cred = await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -168,17 +168,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
         context: context,
         builder: (ctx) => AlertDialog(
           title: Text(
-            AppI18n.t(ctx, en: 'Verify your Gmail', ar: 'تحقق من Gmail'),
+            AppI18n.t(ctx, en: 'Verify your Email', ar: 'تحقق من Email'),
           ),
           content: Text(
             AppI18n.t(
               ctx,
               en:
-                  'We sent a verification link to $email. '
-                  'Open Gmail and tap the link to activate your account.',
+              'We sent a verification link to $email. '
+                  'Open Email and tap the link to activate your account.',
               ar:
-                  'أرسلنا رابط تحقق إلى $email. '
-                  'افتح Gmail واضغط الرابط لتفعيل حسابك.',
+              'أرسلنا رابط تحقق إلى $email. '
+                  'افتح Email واضغط الرابط لتفعيل حسابك.',
             ),
           ),
           actions: [
@@ -249,7 +249,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           child: Form(
                             key: _formKey,
                             autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
+                            AutovalidateMode.onUserInteraction,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
@@ -261,8 +261,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   ),
                                   subtitle: AppI18n.t(
                                     context,
-                                    en: 'Gmail only • Oman (+968) • Strong password required',
-                                    ar: 'Gmail فقط • عُمان (+968) • كلمة مرور قوية مطلوبة',
+                                    en: 'Any Email • Oman (+968) • Strong password required',
+                                    ar: ' اي بريد الكتروني • عُمان (+968) • كلمة مرور قوية مطلوبة',
                                   ),
                                   logoHeight: logoH,
                                 ),
@@ -292,20 +292,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   controller: _email,
                                   label: AppI18n.t(
                                     context,
-                                    en: 'Gmail username',
-                                    ar: 'اسم مستخدم Gmail',
+                                    en: 'Email',
+                                    ar: 'البريد الالكتروني',
                                   ),
                                   hint: AppI18n.t(
                                     context,
-                                    en: 'yourname',
-                                    ar: 'yourname',
+                                    en: 'example@email.com',
+                                    ar: 'example@email.com',
                                   ),
                                   prefixIcon: Icons.alternate_email_rounded,
-                                  suffixText: '@gmail.com',
                                   keyboardType: TextInputType.emailAddress,
                                   textInputAction: TextInputAction.next,
                                   autofillHints: const [AutofillHints.email],
-                                  validator: FormValidators.gmailUsername,
+                                  validator: FormValidators.emailAddress,
                                 ),
                                 const SizedBox(height: 16),
                                 StyledCountryPhoneField(
@@ -339,7 +338,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   validator: FormValidators.strongPassword,
                                   suffix: IconButton(
                                     onPressed: () => setState(
-                                      () => _obscurePass = !_obscurePass,
+                                          () => _obscurePass = !_obscurePass,
                                     ),
                                     icon: Icon(
                                       _obscurePass
@@ -362,12 +361,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     FormValidators.passwordPolicyHint(),
                                     style: Theme.of(context).textTheme.bodySmall
                                         ?.copyWith(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .onSurface
-                                              .withValues(alpha: 0.68),
-                                          height: 1.35,
-                                        ),
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurface
+                                          .withValues(alpha: 0.68),
+                                      height: 1.35,
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(height: 16),
@@ -388,7 +387,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   validator: _confirmValidator,
                                   suffix: IconButton(
                                     onPressed: () => setState(
-                                      () => _obscureConfirm = !_obscureConfirm,
+                                          () => _obscureConfirm = !_obscureConfirm,
                                     ),
                                     icon: Icon(
                                       _obscureConfirm
@@ -418,15 +417,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     onPressed: _loading
                                         ? null
                                         : () {
-                                            Navigator.of(
-                                              context,
-                                            ).pushReplacement(
-                                              AppTransitions.fadeSlide(
-                                                const LoginScreen(),
-                                                routeName: '/login',
-                                              ),
-                                            );
-                                          },
+                                      Navigator.of(
+                                        context,
+                                      ).pushReplacement(
+                                        AppTransitions.fadeSlide(
+                                          const LoginScreen(),
+                                          routeName: '/login',
+                                        ),
+                                      );
+                                    },
                                     child: Text(
                                       AppI18n.t(
                                         context,

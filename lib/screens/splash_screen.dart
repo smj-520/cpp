@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen>
       parent: _heroController,
       curve: Curves.easeOutBack,
     );
-    _autoNavigate = Timer(const Duration(milliseconds: 3200), _goOnboarding);
+    _autoNavigate = Timer(const Duration(seconds: 30), _goOnboarding);
   }
 
   void _goOnboarding() {
