@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../navigation/app_transitions.dart';
 import '../services/app_i18n.dart';
 import '../services/auth_error_messages.dart';
@@ -19,14 +18,12 @@ import '../admin/services/admin_auth_service.dart';
 import 'forgot_password_screen.dart';
 import 'register_screen.dart';
 import 'user_home_screen.dart';
-
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
-
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _email = TextEditingController();

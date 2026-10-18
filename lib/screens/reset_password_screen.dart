@@ -10,7 +10,6 @@ import '../widgets/loading_overlay.dart';
 import '../widgets/primary_action_button.dart';
 import '../widgets/responsive_layout.dart';
 import 'success_screen.dart';
-
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({
     super.key,
