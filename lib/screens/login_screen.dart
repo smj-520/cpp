@@ -14,7 +14,8 @@ import '../widgets/primary_action_button.dart';
 import '../widgets/auth_form_footer_branding.dart';
 import '../widgets/responsive_layout.dart';
 import '../widgets/rounded_back_button.dart';
-import 'admin_home_screen.dart';
+import '../admin/screens/admin_home_screen.dart';
+import '../admin/services/admin_auth_service.dart';
 import 'forgot_password_screen.dart';
 import 'register_screen.dart';
 import 'user_home_screen.dart';
@@ -34,6 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _obscure = true;
   bool _loading = false;
   final _profileRepo = UserProfileRepository();
+  final _adminAuth = AdminAuthService();
 
   @override
   void initState() {
@@ -76,6 +78,15 @@ class _LoginScreenState extends State<LoginScreen> {
       );
       final signedIn = FirebaseAuth.instance.currentUser;
       if (signedIn != null) {
+        final blocked = await _profileRepo.isBlocked(signedIn.uid);
+        if (blocked) {
+          await FirebaseAuth.instance.signOut();
+          if (!mounted) return;
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Your account has been blocked')),
+          );
+          return;
+        }
         await _profileRepo.touchLastLogin(signedIn.uid);
       }
       await RememberCredentials.saveAfterLogin(
@@ -105,21 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       } else {
         if (!mounted) return;
-        final role = user == null
-            ? null
-            : await _profileRepo.getUserRole(user.uid);
-        final normalized = (role ?? 'user').toLowerCase();
-        final target = normalized == 'admin'
-            ? const AdminHomeScreen()
-            : const UserHomeScreen();
-        if (!mounted) return;
-        Navigator.of(context).pushAndRemoveUntil(
-          AppTransitions.fadeSlide(
-            target,
-            routeName: normalized == 'admin' ? '/admin-home' : '/user-home',
-          ),
-          (route) => false,
-        );
+        await _openHomeForSignedInUser();
       }
     } on FirebaseAuthException catch (e) {
       if (!mounted) return;
@@ -129,6 +126,35 @@ class _LoginScreenState extends State<LoginScreen> {
     } finally {
       if (mounted) setState(() => _loading = false);
     }
+  }
+
+  // Looks at the database role, then opens Admin Home or User Home.
+  Future<void> _openHomeForSignedInUser() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return;
+    final role = await _adminAuth.getRole(user.uid);
+    if (!mounted) return;
+    if (_adminAuth.isAdmin(role)) {
+      _openAdminHome();
+    } else {
+      _openUserHome();
+    }
+  }
+
+  // Replaces login with Admin Home. Back cannot return to login.
+  void _openAdminHome() {
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => const AdminHomeScreen()),
+      (route) => false,
+    );
+  }
+
+  // Replaces login with the normal user Home. Back cannot return to login.
+  void _openUserHome() {
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => const UserHomeScreen()),
+      (route) => false,
+    );
   }
 
   @override

@@ -33,8 +33,8 @@ class MyApp extends StatelessWidget {
             pageTransitionsTheme: const PageTransitionsTheme(
               builders: {
                 TargetPlatform.android: FadeForwardsPageTransitionsBuilder(),
-                TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-                TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
+                TargetPlatform.iOS: FadeForwardsPageTransitionsBuilder(),
+                TargetPlatform.macOS: FadeForwardsPageTransitionsBuilder(),
                 TargetPlatform.linux: FadeForwardsPageTransitionsBuilder(),
                 TargetPlatform.windows: FadeForwardsPageTransitionsBuilder(),
                 TargetPlatform.fuchsia: FadeForwardsPageTransitionsBuilder(),

@@ -19,6 +19,7 @@ import '../widgets/primary_action_button.dart';
 import '../widgets/styled_country_phone_field.dart';
 import 'ai_chatbot_screen.dart';
 import 'login_screen.dart';
+import 'send_feedback_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key, required this.isAdmin});
@@ -78,6 +79,30 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
                 ),
+                if (!widget.isAdmin) ...[
+                  const SizedBox(height: 12),
+                  AnimatedAppear(
+                    index: 0,
+                    child: _sectionCard(
+                      title: context.tr('Feedback', 'ملاحظات'),
+                      child: _optionTile(
+                        icon: Icons.rate_review_outlined,
+                        title: context.tr('Send feedback', 'إرسال ملاحظات'),
+                        subtitle: context.tr(
+                          'Tell the admin what you think',
+                          'أخبر المدير برأيك',
+                        ),
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const SendFeedbackScreen(),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ],
                 const SizedBox(height: 12),
                 AnimatedAppear(
                   index: 1,
