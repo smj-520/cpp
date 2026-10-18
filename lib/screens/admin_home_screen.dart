@@ -1,11 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../navigation/app_transitions.dart';
 import '../services/app_i18n.dart';
 import '../widgets/animated_appear.dart';
 import 'settings_screen.dart';
-
 class AdminHomeScreen extends StatelessWidget {
   const AdminHomeScreen({super.key});
 
