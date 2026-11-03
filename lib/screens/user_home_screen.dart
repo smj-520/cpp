@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
 import '../bills/screens/bills_screen.dart';
 import '../budget/screens/budget_screen.dart';
 import '../models/home_finance_data.dart';
